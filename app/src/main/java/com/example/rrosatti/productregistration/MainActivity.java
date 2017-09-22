@@ -1,5 +1,6 @@
 package com.example.rrosatti.productregistration;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
         showCategories();
 
-        
+        listCategories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Intent in = new Intent(MainActivity.this, ProductActivity.class);
+                in.putExtra("categoryId", id);
+                startActivity(in);
+            }
+        });
     }
 
     private void iniViews() {
