@@ -20,8 +20,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE category (" +
-                "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "name TEXT");
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "name TEXT);");
         db.execSQL("CREATE TABLE product (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name TEXT, description TEXT, quantity INTEGER, price REAL, categoryId INTEGER, " +
@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void fillCategories(SQLiteDatabase db) {
         // Book, Movie, (Electronics & Computers), School Supplies
         db.execSQL("INSERT INTO category(name) VALUES (\"Books\"), (\"Movies\"), " +
-                "(\'Electronics & Computers\"), (\"School Supplies\");");
+                "(\"Electronics & Computers\"), (\"School Supplies\");");
     }
 
     private void fillProducts(SQLiteDatabase db) {
@@ -74,18 +74,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "\"Fast 4G LTE speed, up to 1.5 GHz octa-core processor, 2 GB of RAM, and a bright 5.5-Inch " +
                 "full-HD (1080p) display ensures videos and games run smoothly and look great.\", " +
                 "32, 127.92, 3), " +
-                "\"Apple 13\" MacBook Air\", " +
+                "(\"Apple 13' MacBook Air\", " +
                 "\"1.8GHz Intel Core i5 Dual Core Processor, 8GB RAM, 256GB SSD, Mac OS, Silver.\", " +
-                "200, 999999.99, 3");
+                "200, 999999.99, 3);");
 
         // create 2 items of School Supplies category
-        db.execSQL(insertProductTemplate + "\"Pen (Blue) - BIC\", " +
+        db.execSQL(insertProductTemplate + "(\"Pen (Blue) - BIC\", " +
                 "\"Blue pen of the brand BIC.\", " +
                 "100, 0.20, 4), " +
-                "\"Laptop Backpack - JanSport\", " +
+                "(\"Laptop Backpack - JanSport\", " +
                 "\"The JanSport Right Pack Digital Edition comes with modern digital protection " +
                 "features. This backpack includes a padded 15 in laptop sleeve, soft tricot lined " +
                 "tablet sleeve and front pocket with digital organizer.\", " +
-                "30, 65.00, 4");
+                "30, 65.00, 4);");
     }
 }
