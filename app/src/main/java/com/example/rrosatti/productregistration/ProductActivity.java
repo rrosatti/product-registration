@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -55,7 +54,7 @@ public class ProductActivity extends AppCompatActivity {
         listProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int positon, long id) {  
-                Intent in = new Intent(ProductActivity.this,ControlProduct.class);
+                Intent in = new Intent(ProductActivity.this,ControlProductActivity.class);
                 in.putExtra("_id",id);
                 startActivity(in);
             }
@@ -63,12 +62,12 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
         cursor.close();
         database.close();
         helper.close();
-        Log.d("here", "onStop: ");
+        Log.d("here", "onDestroy: ");
     }
 
     private class CustomViewBinder implements SimpleCursorAdapter.ViewBinder {
