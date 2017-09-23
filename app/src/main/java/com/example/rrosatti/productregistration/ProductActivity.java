@@ -1,10 +1,14 @@
 package com.example.rrosatti.productregistration;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -45,6 +49,17 @@ public class ProductActivity extends AppCompatActivity {
                 0);
         simpleCursorAdapter.setViewBinder(new CustomViewBinder());
         listProducts.setAdapter(simpleCursorAdapter);
+
+
+
+        listProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int positon, long id) {  
+                Intent in = new Intent(ProductActivity.this,ControlProduct.class);
+                in.putExtra("_id",id);
+                startActivity(in);
+            }
+        });
     }
 
     @Override
@@ -52,6 +67,8 @@ public class ProductActivity extends AppCompatActivity {
         super.onStop();
         cursor.close();
         database.close();
+        helper.close();
+        Log.d("here", "onStop: ");
     }
 
     private class CustomViewBinder implements SimpleCursorAdapter.ViewBinder {
