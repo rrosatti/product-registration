@@ -13,7 +13,7 @@
 
     <!-- EditText -->
     <string name="hint_quantity_sold">quantity sold</string>
-    <string name="qty_stock">Quantity Stock:</string>
-    <string name="price_product">Price Product: $</string>
+    <string name="qty_stock">Quantity Stock: </string>
+    <string name="price_product">Price Product: $ </string>
 
 </resources>

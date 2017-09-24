@@ -68,8 +68,6 @@ public class ControlProductActivity extends AppCompatActivity {
 
                     database.update("product", contentValues, whereClause, whereArgs);
                     Toast.makeText(getBaseContext(), "Stock successfully updated", Toast.LENGTH_SHORT).show();
-                    String newQtyStock = getString(R.string.qty_stock) + newStock;
-                    tvQtdStock.setText(newQtyStock);
 
                     setResult(Activity.RESULT_OK);
                     finish();
