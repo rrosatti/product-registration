@@ -1,6 +1,8 @@
 package com.example.rrosatti.productregistration;
 
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -43,16 +45,20 @@ public class ControlProductActivity extends AppCompatActivity {
         cursor = database.rawQuery(sql, null);
         cursor.moveToFirst();
 
-        tvDescription.setText("Description: " + cursor.getString(2));
-        tvQtdStock.setText("Quantity Stock: " + cursor.getInt(3));
         final int qtdStock = cursor.getInt(3);
-        tvPriceProduct.setText("Price Product: &" + cursor.getFloat(4));
+        String desc = getString(R.string.description) + cursor.getString(2);
+        String qtyStock = getString(R.string.qty_stock) + qtdStock;
+        String priceProduct = getString(R.string.price_product) + cursor.getFloat(4);
+
+        tvDescription.setText(desc);
+        tvQtdStock.setText(qtyStock);
+        tvPriceProduct.setText(priceProduct);
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(qtdStock - Integer.parseInt(etSetStock.getText().toString()) < 0 ){
-                    Toast.makeText(getBaseContext(),"Value in stock not is sufficient",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(),"Value in stock is not sufficient",Toast.LENGTH_SHORT).show();
                 }else {
                     int newStock = qtdStock - Integer.parseInt(etSetStock.getText().toString());
                     ContentValues contentValues = new ContentValues();
@@ -62,7 +68,11 @@ public class ControlProductActivity extends AppCompatActivity {
 
                     database.update("product", contentValues, whereClause, whereArgs);
                     Toast.makeText(getBaseContext(), "Stock successfully updated", Toast.LENGTH_SHORT).show();
-                    tvQtdStock.setText("Quantity Stock: " + newStock);
+                    String newQtyStock = getString(R.string.qty_stock) + newStock;
+                    tvQtdStock.setText(newQtyStock);
+
+                    setResult(Activity.RESULT_OK);
+                    finish();
                 }
                 }
         });

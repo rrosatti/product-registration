@@ -1,5 +1,6 @@
 package com.example.rrosatti.productregistration;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -56,7 +58,7 @@ public class ProductActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int positon, long id) {  
                 Intent in = new Intent(ProductActivity.this,ControlProductActivity.class);
                 in.putExtra("_id",id);
-                startActivity(in);
+                startActivityForResult(in, 100);
             }
         });
     }
@@ -123,4 +125,25 @@ public class ProductActivity extends AppCompatActivity {
         }
     }
 
+    private void updateCursor() {
+        String sql = "SELECT * FROM product WHERE categoryId = " + categoryId + ";";
+        Cursor newCursor = database.rawQuery(sql, null);
+        CursorAdapter cursorAdapter = (CursorAdapter)listProducts.getAdapter();
+        cursorAdapter.changeCursor(newCursor);
+        cursor.close();
+        cursor = newCursor;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 100) {
+            switch (resultCode) {
+                case Activity.RESULT_OK: {
+                    updateCursor();
+                    break;
+                }
+            }
+        }
+    }
 }

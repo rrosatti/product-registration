@@ -3,10 +3,17 @@
 
     <!-- Button -->
     <string name="button_manage_products">Manage Products</string>
+    <string name="button_update">Update</string>
 
     <!-- TextView -->
     <string name="text_quantity">Quantity: </string>
     <string name="text_price">$ </string>
     <string name="title_activity_control_product">ControlProduct</string>
     <string name="description">Description: </string>
+
+    <!-- EditText -->
+    <string name="hint_quantity_sold">quantity sold</string>
+    <string name="qty_stock">Quantity Stock:</string>
+    <string name="price_product">Price Product: $</string>
+
 </resources>
